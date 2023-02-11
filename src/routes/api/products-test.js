@@ -1,5 +1,5 @@
 const { Router } = require("express")
-const mock = require('../controllers/fakermock')
+const mock = require('../../controllers/fakermock')
 const productsRouterTest = Router();
 
 productsRouterTest.get('/', async (req, res) => {

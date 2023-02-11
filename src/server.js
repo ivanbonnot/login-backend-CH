@@ -4,8 +4,11 @@ const session = require('express-session');
 const { Server: HTTPServer } = require('http');
 const { Server: IOServer } = require('socket.io');
 
-const productsRouter = require("./routes/product");
-const productsRouterTest = require("./routes/products-test");
+const productsRouter = require("./routes/api/product");
+const productsRouterTest = require("./routes/api/products-test");
+const authWebRouter = require('../src/routes/web/auth')
+const homeWebRouter = require('../src/routes/web/home')
+
 const  connectToDb  = require("./config/connectToDb");
 
 const app = express();
@@ -51,6 +54,12 @@ server.on('error', error => console.log(`Error en servidor ${error}`))
 //Routes
 app.use("/api/productos", productsRouter)
 app.use("/api/productos-test", productsRouterTest)
+
+//__ WebServ Routes __//
+
+app.use(authWebRouter)
+app.use(homeWebRouter)
+
 
 //websocket
 io.on('connection', async socket => {
