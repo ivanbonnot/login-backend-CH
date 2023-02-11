@@ -1,19 +1,20 @@
 const morgan = require('morgan');
 const express = require('express');
-const { Server: HTTPServer } = require('http')
-const { Server: IOServer } = require('socket.io')
+const session = require('express-session');
+const { Server: HTTPServer } = require('http');
+const { Server: IOServer } = require('socket.io');
 
-const productsRouter = require("./routes/product")
-const productsRouterTest = require("./routes/products-test")
-const  connectToDb  = require("./config/connectToDb") 
+const productsRouter = require("./routes/product");
+const productsRouterTest = require("./routes/products-test");
+const  connectToDb  = require("./config/connectToDb");
 
 const app = express();
 
 const httpServer = new HTTPServer(app)
 const io = new IOServer(httpServer)
 
-const productController = require('./controllers/productMongoDB')
-const chatsController = require('./controllers/chatMongoDB')
+const productController = require('./controllers/productMongoDB');
+const chatsController = require('./controllers/chatMongoDB');
 
 
 //Settings
@@ -26,10 +27,17 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(express.static('./public'))
 
-//Starting the server
-// httpServer.listen(8080, ()=> {
-//     console.log('Server On')
-// })
+app.use(session({
+    store: MongoStore.create({ mongoUrl: 'mongodb+srv://coderhouse:coderhouse123@cluster0.xvejx.gcp.mongodb.net/test' }),
+    secret: '123456',
+    resave: false,
+    saveUninitialized: false,
+    rolling: true,
+    cookie: {
+        maxAge: 60000
+    }
+}))
+
 
 const PORT = 8080
 const server = httpServer.listen(PORT, () => {
@@ -37,6 +45,7 @@ const server = httpServer.listen(PORT, () => {
     console.log(`Servidor http escuchando en el puerto ${server.address().port}`)
 })
 server.on('error', error => console.log(`Error en servidor ${error}`))
+
 
 
 //Routes
