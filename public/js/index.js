@@ -99,3 +99,5 @@ function makeHtmlList(mensajes) {
         })
          .join(" ");
 }
+
+const welcomeName = document.getElementById('welcome')

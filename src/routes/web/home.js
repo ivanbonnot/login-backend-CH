@@ -1,17 +1,20 @@
-const Router = require('express')
+const { Router } = require('express')
 const webAuth = require('../../auth/index.js')
 
 const path = require('path')
 
-const homeWebRouter = new Router()
+const homeWebRouter = Router()
 
-homeWebRouter.get('/home', webAuth, (req, res) => {
-    // res.sendFile(path.join(process.cwd(), '/views/home.html'))
-    res.render(path.join(process.cwd(), '/views/pages/home.ejs'), { nombre: req.session.nombre })
-})
+ homeWebRouter.get('/home', (req, res) => {
+     const nombre = req.session?.nombre
+    if (nombre) {
+        res.sendFile(path.join(process.cwd(), 'public/home.html'))
+    } else {
+        res.sendFile(path.join(process.cwd(), 'public/views/login.html'))
+        res.redirect('/login')
+    }
+    //  res.sendFile(path.join(process.cwd(), 'public/home.html'))
+ })
 
-homeWebRouter.get('/productos-vista-test', (req, res) => {
-    res.sendFile(path.join(process.cwd(), '/views/productos-vista-test.html'))
-})
 
 module.exports = homeWebRouter

@@ -1,6 +1,8 @@
 const morgan = require('morgan');
 const express = require('express');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
+
 const { Server: HTTPServer } = require('http');
 const { Server: IOServer } = require('socket.io');
 
@@ -57,8 +59,8 @@ app.use("/api/productos-test", productsRouterTest)
 
 //__ WebServ Routes __//
 
-app.use(authWebRouter)
-app.use(homeWebRouter)
+app.use("/", authWebRouter)
+app.use("/", homeWebRouter)
 
 
 //websocket
