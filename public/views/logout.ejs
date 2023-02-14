@@ -22,11 +22,14 @@ https://cdn.jsdelivr.net/npm/normalizr@3.6.2/dist/normalizr.browser.min.js
 <body>
     <div class="container mt-3">
         <div class="jumbotron">
-            <h1>See you </h1>
-            
+            <h1>See you <%=nombre%>!</h1>
         </div>
     </div>
-    <script src="../js/index.js"></script>
+    <script>
+        setTimeout(() => {
+            location.href = '/login'
+        }, 2000)
+    </script>
 </body>
 
 </html>

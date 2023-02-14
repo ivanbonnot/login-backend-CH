@@ -21,9 +21,11 @@ https://cdn.jsdelivr.net/npm/normalizr@3.6.2/dist/normalizr.browser.min.js
 
 <body>
     <div id="welcome" class="jumbotron">
+        <h2> Bienvenido <%=nombre%>
+        </h2>
         <form action="/logout" method="get" autocomplete="off">
             <button class="btn btn-success mt-3">Logout</button>
-        </form>
+        </form>`
     </div>
 
     <div class="container jumbotron">
@@ -45,18 +47,24 @@ https://cdn.jsdelivr.net/npm/normalizr@3.6.2/dist/normalizr.browser.min.js
         <div class="chat">
             <h1>Chat</h1>
 
-            <input type="text" id="inputEmail" class="form-control w-75 my-2 mr-2" placeholder="Ingresá tu email" name="email">
-            <input type="text" id="inputName" class="form-control w-75 my-2 mr-2" placeholder="Ingresá tu nombre" name="name">
-            <input type="text" id="inputLastName" class="form-control w-75 my-2 mr-2" placeholder="Ingresá tu apellidu" name="lastname">
-            <input type="text" id="inputAge" class="form-control w-75 my-2 mr-2" placeholder="Ingresá tu edad" name="age">
-            <input type="text" id="inputAlias" class="form-control w-75 my-2 mr-2" placeholder="Ingresá tu alias" name="nickname">
-            <input type="text" id="inputAvatar" class="form-control w-75 my-2 mr-2" placeholder="Ingresá tu avatar" name="avatar">
+            <input type="text" id="inputEmail" class="form-control w-75 my-2 mr-2" placeholder="Ingresá tu email"
+                name="email">
+            <input type="text" id="inputName" class="form-control w-75 my-2 mr-2" placeholder="Ingresá tu nombre"
+                name="name">
+            <input type="text" id="inputLastName" class="form-control w-75 my-2 mr-2" placeholder="Ingresá tu apellidu"
+                name="lastname">
+            <input type="text" id="inputAge" class="form-control w-75 my-2 mr-2" placeholder="Ingresá tu edad"
+                name="age">
+            <input type="text" id="inputAlias" class="form-control w-75 my-2 mr-2" placeholder="Ingresá tu alias"
+                name="nickname">
+            <input type="text" id="inputAvatar" class="form-control w-75 my-2 mr-2" placeholder="Ingresá tu avatar"
+                name="avatar">
 
 
             <form id="formPublicarMensaje" class="form-inline" autocomplete="off">
                 <div class="form-group">
-                    <input id="inputMensaje" type="text" class="form-control my-2 mr-2"
-                        placeholder="Ingresá tu mensaje" name="text">
+                    <input id="inputMensaje" type="text" class="form-control my-2 mr-2" placeholder="Ingresá tu mensaje"
+                        name="text">
                     <button id="btnEnviar" type="submit" class="btn btn-primary my-2">Enviar</button>
                 </div>
             </form>

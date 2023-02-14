@@ -8,7 +8,7 @@ const { Server: IOServer } = require('socket.io');
 
 const productsRouter = require("./routes/api/product");
 const productsRouterTest = require("./routes/api/products-test");
-const authWebRouter = require('../src/routes/web/auth')
+const authWebRouter = require('../src/routes/web/auth.js')
 const homeWebRouter = require('../src/routes/web/home')
 
 const  connectToDb  = require("./config/connectToDb");
@@ -31,6 +31,7 @@ app.use(morgan('dev'))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(express.static('./public'))
+
 
 app.use(session({
     store: MongoStore.create({ mongoUrl: 'mongodb+srv://coderhouse:coderhouse123@cluster0.xvejx.gcp.mongodb.net/test' }),

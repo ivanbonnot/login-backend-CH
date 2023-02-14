@@ -80,24 +80,22 @@ formPublicarMensaje.addEventListener("submit", (e) => {
 });
 
 socket.on("mensajes", (mensajes) => {
-    
-        console.log(mensajes)
-         const html =  makeHtmlList(mensajes);
-        document.getElementById("mensajes").innerHTML = html;
-        
+
+    console.log(mensajes)
+    const html = makeHtmlList(mensajes);
+    document.getElementById("mensajes").innerHTML = html;
+
 });
 
 function makeHtmlList(mensajes) {
     return mensajes.mensajes.map((mensaje) => {
-            return `
+        return `
             <div>
                 <b style="color:blue;">${mensaje.author.name}</b>
                 [<span style="color:brown;">${mensaje.date}</span>] :
                 <i style="color:green;">${mensaje.text}</i>
             </div>
         `;
-        })
-         .join(" ");
+    })
+        .join(" ");
 }
-
-const welcomeName = document.getElementById('welcome')

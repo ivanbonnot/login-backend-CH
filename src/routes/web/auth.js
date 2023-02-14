@@ -1,12 +1,9 @@
-const { Router } = require('express')  
+const { Router } = require('express')
 
-const path = require('path') 
+const path = require('path');
 
 const authWebRouter = Router()
 
-// authWebRouter.get('/', (req, res) => {
-//     res.redirect('/home')
-// })
 
 authWebRouter.get('/login', (req, res) => {
     const nombre = req.session?.nombre
@@ -23,7 +20,7 @@ authWebRouter.get('/logout', (req, res) => {
     if (nombre) {
         req.session.destroy(err => {
             if (!err) {
-                res.render(path.join(process.cwd(), 'public/views/logout.html'), { nombre })
+                res.render(path.join(process.cwd(), 'public/views/logout.ejs'), { nombre })
             } else {
                 res.redirect('/home')
             }
@@ -36,9 +33,10 @@ authWebRouter.get('/logout', (req, res) => {
 
 authWebRouter.post('/login', (req, res) => {
     req.session.nombre = req.body.nombre
+    nombreSession = req.session.nombre
     res.redirect('/home')
 })
 
 
 
-module.exports = authWebRouter
+module.exports = authWebRouter 
