@@ -11,12 +11,12 @@ const productsRouterTest = require("./routes/api/products-test");
 const authWebRouter = require('../src/routes/web/auth.js')
 const homeWebRouter = require('../src/routes/web/home')
 
-const  connectToDb  = require("./config/connectToDb");
+const connectToDb = require("./config/connectToDb");
 
 const app = express();
 
-const httpServer = new HTTPServer(app)
-const io = new IOServer(httpServer)
+const httpServer = new HTTPServer(app);
+const io = new IOServer(httpServer);
 
 const productController = require('./controllers/productMongoDB');
 const chatsController = require('./controllers/chatMongoDB');
