@@ -25,11 +25,16 @@ https://cdn.jsdelivr.net/npm/normalizr@3.6.2/dist/normalizr.browser.min.js
         <div class="jumbotron">
             <h1>Register de Usuario</h1>
             <br>
-            <form action="/login" method="post" autocomplete="off">
+            <form action="/register" method="post" autocomplete="off">
                 <div>
                     <p>Username</p>
-                    <input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username"
+                    <input type="text" name="name" autofocus="" autocapitalize="none" autocomplete="username"
                         required="" id="id_username">
+                </div>
+                <div>
+                    <p>e-Mail</p>
+                    <input type="email" name="email" autofocus="" autocapitalize="none" autocomplete="email" required=""
+                        id="id_email">
                 </div>
                 <div>
                     <p>Password</p>

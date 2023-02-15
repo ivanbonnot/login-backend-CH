@@ -38,5 +38,23 @@ authWebRouter.post('/login', (req, res) => {
 })
 
 
+authWebRouter.post('/register', (req, res) => {
+    const { name, email, password } = req.body;
+  
+    const existentUser = users.find(user => user.name === name);
+    if (existentUser) {
+      res.json({ error: 'El usuario ya existe' });
+      return;
+    }
+  
+    const newUser = { name, email, password };
+    users.push(newUser);
+  
+    const token = generateToken(newUser);
+    req.session.counter = 0;
+  
+    res.cookie('token', token).redirect('/datos.html');
+  });
+
 
 module.exports = authWebRouter 
