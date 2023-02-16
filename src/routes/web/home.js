@@ -7,6 +7,8 @@ homeWebRouter.get('/home', (req, res) => {
     const nombre = req.session?.nombre
 
     if (nombre) {
+        req.session.counter ++;
+        res.json({ user: req.user, counter: req.session.counter });
         res.render(path.join(process.cwd(), 'public/views/home.ejs'), { nombre })
     } else {
         res.sendFile(path.join(process.cwd(), 'public/views/login.html'))

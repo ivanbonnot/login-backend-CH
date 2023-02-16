@@ -27,9 +27,6 @@ productsRouter.get('/:id', async (req, res) => {
 
 productsRouter.post('/', async (req, res) => {
     if (adm) {
-        // const { title, description, code, thumbnail, price, stock } = req.body
-
-        // if (title && description && code && thumbnail && price && stock) {
         const { title, description, code, thumbnail, price, stock } = req.body;
 
         const product = new Product(
@@ -41,15 +38,8 @@ productsRouter.post('/', async (req, res) => {
             stock
         );
 
-        console.log(product)
-        console.log(req.body)
-        // const product = new productoModel(product);
-        // await product.save();
         productController.saveProduct(product)
         res.json('Guardado')
-        // } else {
-        //     res.send('Invalido, todos los campos son obligatorios')
-        // }
 
     } else {
         res.send('Error: 403 Ruta: "api/productos" Método: "POST" No Autorizada ')
