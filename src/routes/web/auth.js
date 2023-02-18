@@ -3,12 +3,11 @@ const { Router } = require('express')
 const path = require('path');
 const User = require('../../class/User')
 const userController = require('../../controllers/userMongoDB')
-const auth = require('../../middleware/authjson')
-const { generateToken } = require('../../config/tokenhandler');
+
+const passport = require('passport');
+require('../../config/authPassLocal');
 
 const authWebRouter = Router()
-
-const users = [];
 
 //__LOGIN__//
 
@@ -22,18 +21,10 @@ authWebRouter.get('/login', (req, res) => {
 })
 
 
-authWebRouter.post('/login', (req, res) => {
-    const { name, email, password } = req.body;
-    console.log(users)
-    const user = users.find(user => user.name === name && user.password === password);
-    if (!user) {
-        res.json({ error: 'Credenciales inválidas' });
-        return;
-    }
-
-    const token = generateToken(user);
-    
-    res.cookie('token', token).render(path.join(process.cwd(), 'public/views/home.ejs'), { name });
+authWebRouter.post('/login', passport.authenticate('login', { failureRedirect: '/login' }), (req, res) => {
+    req.session.username = req.user.username;
+    const { username, email, password } = req.body;
+    res.render(path.join(process.cwd(), 'public/views/home.ejs'), { username });
 });
 
 
@@ -49,26 +40,19 @@ authWebRouter.get('/register', (req, res) => {
 })
 
 
-authWebRouter.post('/register', (req, res) => {
+authWebRouter.post('/register', passport.authenticate('register', { failureRedirect: '/login' }), (req, res) => {
+    req.session.username = req.user.username;
+    const { username, email, password } = req.body;
 
-    const { name, email, password } = req.body;
-
-    const existentUser = users.find(user => user.name === name);
-    if (existentUser) {
-        res.json({ error: 'El usuario ya existe' });
-        return;
-    } else {
-        
     const newUser = new User(
-        name, email, password
+        username,
+        email,
+        password
     )
-    users.push(newUser);
+
     userController.saveUser(newUser);
-    const token = generateToken(newUser);
-    console.log(users)
-    req.session.counter = 0;
-    res.cookie('token', token).redirect('/login');
-    }
+    res.redirect('/login');
+
 });
 
 

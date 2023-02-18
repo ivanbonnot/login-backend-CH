@@ -1,8 +1,9 @@
 const { Router } = require('express')
 const path = require('path')
 const homeWebRouter = Router()
+const auth = require('../../middleware/authjson')
 
-homeWebRouter.get('/home', (req, res) => {
+homeWebRouter.get('/home',auth, (req, res) => {
 
     const nombre = req.session?.nombre
 

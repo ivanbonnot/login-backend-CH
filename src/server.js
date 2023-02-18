@@ -3,6 +3,8 @@ const express = require('express');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 
+const passport = require('passport');
+
 const { Server: HTTPServer } = require('http');
 const { Server: IOServer } = require('socket.io');
 
@@ -14,6 +16,8 @@ const homeWebRouter = require('../src/routes/web/home')
 const connectToDb = require("./config/connectToDb");
 
 const app = express();
+
+
 
 const httpServer = new HTTPServer(app);
 const io = new IOServer(httpServer);
@@ -36,8 +40,8 @@ app.use(express.static('./public'))
 app.use(session({
     store: MongoStore.create({ mongoUrl: 'mongodb+srv://coderhouse:coderhouse123@cluster0.xvejx.gcp.mongodb.net/test' }),
     secret: '123456',
-    resave: false,
-    saveUninitialized: false,
+    resave: true,
+    saveUninitialized: true,
     rolling: true,
     cookie: {
         maxAge: 60000
