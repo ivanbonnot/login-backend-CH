@@ -8,3 +8,14 @@ const togglePassword = document.querySelector('#togglePassword');
     // toggle the eye slash icon
     this.classList.toggle('fa-eye-slash');
 });
+
+// flash.js
+setTimeout(() => {
+  const flash = document.querySelector('.flash');
+  if (flash) {
+    flash.classList.add('hide');
+    setTimeout(() => {
+      flash.remove();
+    }, 1000);
+  }
+}, 2000);

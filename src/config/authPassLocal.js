@@ -13,7 +13,7 @@ passport.deserializeUser(function(username, done) {
   done(null, user);
 });
 
-passport.use('login', new LocalStrategy((username, password, done) => {
+passport.use('login', new LocalStrategy((username, password, done, failureFlash= true) => {
   const user = users.find(user => user.username === username && compareSync(password, user.password));
 
   if (user) {
@@ -21,13 +21,13 @@ passport.use('login', new LocalStrategy((username, password, done) => {
     return;
   }
 
-  done(null, false);
+  done(null, false, { message: 'Nombre de usuario o contraseña incorrectos' });
 }));
 
-passport.use('register', new LocalStrategy((username, password, done) => {
+passport.use('register', new LocalStrategy((username, password, done, failureFlash= true) => {
   const existentUser = users.find(user => user.username === username);
   if (existentUser) {
-    done(new Error('User already exists'));
+    done(null, false, { message: 'El usuario o el email ya existe' });
     return;
   }
 
