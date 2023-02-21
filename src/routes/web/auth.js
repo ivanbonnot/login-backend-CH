@@ -10,6 +10,8 @@ require('../../config/authPassLocal');
 
 const authWebRouter = Router()
 authWebRouter.use(flash())
+
+
 //__LOGIN__//
 
 authWebRouter.get('/login', (req, res) => {
@@ -18,7 +20,6 @@ authWebRouter.get('/login', (req, res) => {
         res.redirect('/home')
     } else {
         res.render(path.join(process.cwd(), 'public/views/login.ejs'), { message: req.flash('error') })
-       
     }
 })
 
