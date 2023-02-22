@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 
+
 let isConnected;
 
 const connectToDb = async (db) => {
@@ -7,7 +8,7 @@ const connectToDb = async (db) => {
     if (!isConnected && db == "mongo") {
         try {
             mongoose.set('strictQuery', true);
-            await mongoose.connect('mongodb+srv://coderhouse:coderhouse123@cluster0.xvejx.gcp.mongodb.net/test',
+            await mongoose.connect(`mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO_DB_PASSWORD}@cluster0.xvejx.gcp.mongodb.net/test`,
                 { useNewUrlParser: true, useUnifiedTopology: true })
 
                 .then(() => {

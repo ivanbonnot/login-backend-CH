@@ -3,13 +3,15 @@ const express = require('express');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 
-const passport = require('passport');
+require('dotenv').config()
 
 const { Server: HTTPServer } = require('http');
 const { Server: IOServer } = require('socket.io');
 
+const infoRouter = require('./routes/api/info')
 const productsRouter = require("./routes/api/product");
 const productsRouterTest = require("./routes/api/products-test");
+const randomsRouter = require('./routes/api/randoms')
 const authWebRouter = require('../src/routes/web/auth.js')
 const homeWebRouter = require('../src/routes/web/home')
 
@@ -59,8 +61,10 @@ server.on('error', error => console.log(`Error en servidor ${error}`))
 
 
 //Routes
+app.use("/info", infoRouter)
 app.use("/api/productos", productsRouter)
 app.use("/api/productos-test", productsRouterTest)
+app.use("/api/randoms", randomsRouter)
 
 //__ WebServ Routes __//
 
