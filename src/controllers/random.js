@@ -1,5 +1,5 @@
 class Random {
-    getNumers = (amount) => {
+    getNumbers = (amount) => {
 
         const numerosAleatorios = {};
 
